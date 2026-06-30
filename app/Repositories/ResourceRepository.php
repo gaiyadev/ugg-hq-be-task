@@ -12,14 +12,14 @@ class ResourceRepository implements ResourceRepositoryInterface
         private readonly Resource $model
     ) {}
 
-    public function findById(int $id): ?Resource
+    public function findById(string $id): ?Resource
     {
         return $this->model
             ->with(['creator:id,name,email', 'updater:id,name,email', 'approver:id,name,email'])
             ->find($id);
     }
 
-    public function findByIdWithTrashed(int $id): ?Resource
+    public function findByIdWithTrashed(string $id): ?Resource
     {
         return $this->model->withTrashed()
             ->with(['creator:id,name,email'])
@@ -87,12 +87,12 @@ class ResourceRepository implements ResourceRepositoryInterface
         return (bool) $resource->delete();
     }
 
-    public function restore(int $id): bool
+    public function restore(string $id): bool
     {
         return (bool) $this->model->withTrashed()->find($id)?->restore();
     }
 
-    public function forceDelete(int $id): bool
+    public function forceDelete(string $id): bool
     {
         $resource = $this->model->withTrashed()->find($id);
         return $resource ? (bool) $resource->forceDelete() : false;

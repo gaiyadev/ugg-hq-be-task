@@ -77,7 +77,7 @@ class ResourceController extends Controller
     /**
      * GET /api/resources/{id}
      */
-    public function show(int $id): JsonResponse
+    public function show(string $id): JsonResponse
     {
         $resource = $this->resourceService->findOrFail($id);
 
@@ -90,7 +90,7 @@ class ResourceController extends Controller
     /**
      * PUT /api/resources/{id}
      */
-    public function update(UpdateResourceRequest $request, int $id): JsonResponse
+    public function update(UpdateResourceRequest $request, string $id): JsonResponse
     {
         $resource = $this->resourceService->update(
             id:      $id,
@@ -108,7 +108,7 @@ class ResourceController extends Controller
      * DELETE /api/resources/{id}
      * Soft delete — recoverable.
      */
-    public function destroy(Request $request, int $id): JsonResponse
+    public function destroy(Request $request, string $id): JsonResponse
     {
         $this->resourceService->delete($id, $request->user());
 
@@ -119,7 +119,7 @@ class ResourceController extends Controller
      * POST /api/resources/{id}/submit
      * Transitions: draft → pending
      */
-    public function submit(Request $request, int $id): JsonResponse
+    public function submit(Request $request, string $id): JsonResponse
     {
         $resource = $this->resourceService->submit($id, $request->user());
 
@@ -134,7 +134,7 @@ class ResourceController extends Controller
      * Transitions: pending → approved
      * Generates SHA256 signature.
      */
-    public function approve(Request $request, int $id): JsonResponse
+    public function approve(Request $request, string $id): JsonResponse
     {
         $resource = $this->resourceService->approve($id, $request->user());
 
@@ -148,7 +148,7 @@ class ResourceController extends Controller
      * POST /api/resources/{id}/reject
      * Transitions: pending → rejected
      */
-    public function reject(Request $request, int $id): JsonResponse
+    public function reject(Request $request, string $id): JsonResponse
     {
         $resource = $this->resourceService->reject($id, $request->user());
 
@@ -162,7 +162,7 @@ class ResourceController extends Controller
      * GET /api/resources/{id}/verify-signature
      * Verify the SHA256 signature on an approved resource.
      */
-    public function verifySignature(int $id): JsonResponse
+    public function verifySignature(string $id): JsonResponse
     {
         $isValid = $this->resourceService->verifySignature($id);
         $resource = $this->resourceService->findOrFail($id);

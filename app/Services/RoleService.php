@@ -30,7 +30,7 @@ class RoleService
         return $this->roleRepository->paginate($perPage, $filters);
     }
 
-    public function findOrFail(int $id): Role
+    public function findOrFail(string $id): Role
     {
         $role = $this->roleRepository->findById($id);
 
@@ -57,7 +57,7 @@ class RoleService
      *
      * @param  array<string, mixed>  $data
      */
-    public function update(int $id, array $data): Role
+    public function update(string $id, array $data): Role
     {
         $role = $this->findOrFail($id);
 
@@ -80,7 +80,7 @@ class RoleService
      *
      * @throws \Exception
      */
-    public function delete(int $id): bool
+    public function delete(string $id): bool
     {
         $role = $this->findOrFail($id);
 
@@ -96,7 +96,7 @@ class RoleService
      *
      * @param  int[]  $permissionIds
      */
-    public function syncPermissions(int $roleId, array $permissionIds): Role
+    public function syncPermissions(string $roleId, array $permissionIds): Role
     {
         $role = $this->findOrFail($roleId);
         $this->roleRepository->syncPermissions($role, $permissionIds);

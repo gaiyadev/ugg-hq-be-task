@@ -67,7 +67,7 @@ class UserController extends Controller
     /**
      * GET /api/users/{id}
      */
-    public function show(int $id): JsonResponse
+    public function show(string $id): JsonResponse
     {
         $user = $this->userService->findOrFail($id);
 
@@ -80,7 +80,7 @@ class UserController extends Controller
     /**
      * PUT /api/users/{id}
      */
-    public function update(UpdateUserRequest $request, int $id): JsonResponse
+    public function update(UpdateUserRequest $request, string $id): JsonResponse
     {
         $user = $this->userService->update($id, $request->validated());
 
@@ -93,7 +93,7 @@ class UserController extends Controller
     /**
      * DELETE /api/users/{id}
      */
-    public function destroy(int $id): JsonResponse
+    public function destroy(string $id): JsonResponse
     {
         $this->userService->delete($id);
 
@@ -104,7 +104,7 @@ class UserController extends Controller
      * POST /api/users/{id}/roles
      * Body: { role_id: int }
      */
-    public function assignRole(Request $request, int $id): JsonResponse
+    public function assignRole(Request $request, string $id): JsonResponse
     {
         $request->validate(['role_id' => ['required', 'integer', 'exists:roles,id']]);
 
@@ -121,7 +121,7 @@ class UserController extends Controller
     /**
      * DELETE /api/users/{id}/roles/{roleId}
      */
-    public function removeRole(Request $request, int $id, int $roleId): JsonResponse
+    public function removeRole(Request $request, string $id, string $roleId): JsonResponse
     {
         $this->userService->removeRole($id, $roleId, $request->user());
 

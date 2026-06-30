@@ -20,7 +20,7 @@ class CreateRoleRequest extends FormRequest
             'name'           => ['required', 'string', 'min:2', 'max:100', 'unique:roles,name'],
             'description'    => ['nullable', 'string', 'max:500'],
             'permission_ids' => ['sometimes', 'array'],
-            'permission_ids.*' => ['integer', 'exists:permissions,id'],
+            'permission_ids.*' => ['uuid', 'exists:permissions,id'],
         ];
     }
 }

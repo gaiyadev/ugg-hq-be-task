@@ -30,7 +30,7 @@ class ResourceService
         return $this->resourceRepository->paginate($perPage, $filters);
     }
 
-    public function findOrFail(int $id): Resource
+    public function findOrFail(string $id): Resource
     {
         $resource = $this->resourceRepository->findById($id);
 
@@ -66,7 +66,7 @@ class ResourceService
      * Only draft/pending resources can be updated.
      * Dispatches ResourceUpdated event for audit logging.
      */
-    public function update(int $id, ResourceDTO $dto, User $updater): Resource
+    public function update(string $id, ResourceDTO $dto, User $updater): Resource
     {
         return DB::transaction(function () use ($id, $dto, $updater) {
             $resource = $this->findOrFail($id);
@@ -95,7 +95,7 @@ class ResourceService
      * Approve a resource.
      * Generates SHA256 signature, transitions status to approved.
      */
-    public function approve(int $id, User $approver): Resource
+    public function approve(string $id, User $approver): Resource
     {
         return DB::transaction(function () use ($id, $approver) {
             $resource      = $this->findOrFail($id);
@@ -131,7 +131,7 @@ class ResourceService
     /**
      * Reject a resource (pending → rejected).
      */
-    public function reject(int $id, User $rejector): Resource
+    public function reject(string $id, User $rejector): Resource
     {
         return DB::transaction(function () use ($id, $rejector) {
             $resource      = $this->findOrFail($id);
@@ -155,7 +155,7 @@ class ResourceService
     /**
      * Submit a draft resource for review (draft → pending).
      */
-    public function submit(int $id, User $submitter): Resource
+    public function submit(string $id, User $submitter): Resource
     {
         return DB::transaction(function () use ($id, $submitter) {
             $resource      = $this->findOrFail($id);
@@ -179,7 +179,7 @@ class ResourceService
     /**
      * Soft-delete a resource. Dispatches ResourceDeleted event.
      */
-    public function delete(int $id, User $actor): bool
+    public function delete(string $id, User $actor): bool
     {
         $resource = $this->findOrFail($id);
 
@@ -195,7 +195,7 @@ class ResourceService
     /**
      * Verify a resource's SHA256 signature for tamper detection.
      */
-    public function verifySignature(int $id): bool
+    public function verifySignature(string $id): bool
     {
         $resource = $this->findOrFail($id);
 

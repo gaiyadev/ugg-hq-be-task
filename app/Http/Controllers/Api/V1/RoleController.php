@@ -58,7 +58,7 @@ class RoleController extends Controller
     /**
      * GET /api/roles/{id}
      */
-    public function show(int $id): JsonResponse
+    public function show(string $id): JsonResponse
     {
         $role = $this->roleService->findOrFail($id);
 
@@ -68,7 +68,7 @@ class RoleController extends Controller
     /**
      * PUT /api/roles/{id}
      */
-    public function update(UpdateRoleRequest $request, int $id): JsonResponse
+    public function update(UpdateRoleRequest $request, string $id): JsonResponse
     {
         $role = $this->roleService->update($id, $request->validated());
 
@@ -78,7 +78,7 @@ class RoleController extends Controller
     /**
      * DELETE /api/roles/{id}
      */
-    public function destroy(int $id): JsonResponse
+    public function destroy(string $id): JsonResponse
     {
         $this->roleService->delete($id);
 
@@ -90,7 +90,7 @@ class RoleController extends Controller
      * Body: { permission_ids: [1, 2, 3] }
      * Replaces ALL permissions on the role.
      */
-    public function syncPermissions(SyncPermissionsRequest $request, int $id): JsonResponse
+    public function syncPermissions(SyncPermissionsRequest $request, string $id): JsonResponse
     {
         $role = $this->roleService->syncPermissions($id, $request->validated('permission_ids'));
 

@@ -24,7 +24,7 @@ class SyncPermissionsRequest extends FormRequest
     {
         return [
             'permission_ids'   => ['required', 'array'],
-            'permission_ids.*' => ['integer', 'exists:permissions,id'],
+            'permission_ids.*' => ['uuid', 'exists:permissions,id'],
         ];
     }
 

@@ -20,9 +20,9 @@ class AuditLogRepository implements AuditLogRepositoryInterface
     public function log(
         AuditAction $action,
         string $entityType,
-        ?int $entityId,
+        ?string $entityId,
         string $description,
-        ?int $userId = null,
+        ?string $userId = null,
         ?array $metadata = null,
         ?string $ipAddress = null,
         ?string $userAgent = null
@@ -78,7 +78,7 @@ class AuditLogRepository implements AuditLogRepositoryInterface
         return $query->paginate($perPage);
     }
 
-    public function findById(int $id): ?AuditLog
+    public function findById(string $id): ?AuditLog
     {
         return $this->model->with(['user:id,name,email'])->find($id);
     }

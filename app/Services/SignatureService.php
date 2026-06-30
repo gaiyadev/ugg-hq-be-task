@@ -40,10 +40,10 @@ class SignatureService
      * Called when a resource is approved.
      */
     public function signResource(
-        int $resourceId,
+        string $resourceId,
         string $title,
         ?string $description,
-        int $createdBy,
+        string $createdBy,
         string $approvedAt
     ): string {
         return $this->generate([
@@ -71,10 +71,10 @@ class SignatureService
      */
     public function verifyResource(
         string $storedSignature,
-        int $resourceId,
+        string $resourceId,
         string $title,
         ?string $description,
-        int $createdBy,
+        string $createdBy,
         string $approvedAt
     ): bool {
         $expected = $this->signResource(

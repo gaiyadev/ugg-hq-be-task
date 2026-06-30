@@ -28,9 +28,9 @@ class AuditLogService
     public function log(
         AuditAction $action,
         string $entityType,
-        ?int $entityId,
+        ?string $entityId,
         string $description,
-        ?int $userId = null,
+        ?string $userId = null,
         ?array $metadata = null,
         ?Request $request = null
     ): AuditLog {
@@ -62,7 +62,7 @@ class AuditLogService
         return $this->auditLogRepository->paginate($perPage, $filters);
     }
 
-    public function findById(int $id): ?AuditLog
+    public function findById(string $id): ?AuditLog
     {
         return $this->auditLogRepository->findById($id);
     }

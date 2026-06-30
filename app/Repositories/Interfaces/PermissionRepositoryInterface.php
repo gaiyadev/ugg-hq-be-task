@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Collection;
 
 interface PermissionRepositoryInterface
 {
-    public function findById(int $id): ?Permission;
+    public function findById(string $id): ?Permission;
 
     public function findBySlug(string $slug): ?Permission;
 

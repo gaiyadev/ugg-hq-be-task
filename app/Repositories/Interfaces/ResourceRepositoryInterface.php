@@ -7,9 +7,9 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 interface ResourceRepositoryInterface
 {
-    public function findById(int $id): ?Resource;
+    public function findById(string $id): ?Resource;
 
-    public function findByIdWithTrashed(int $id): ?Resource;
+    public function findByIdWithTrashed(string $id): ?Resource;
 
     /**
      * @param  array<string, mixed>  $filters  Keys: status, search, sort_by, sort_dir, created_by
@@ -28,7 +28,7 @@ interface ResourceRepositoryInterface
 
     public function delete(Resource $resource): bool;
 
-    public function restore(int $id): bool;
+    public function restore(string $id): bool;
 
-    public function forceDelete(int $id): bool;
+    public function forceDelete(string $id): bool;
 }

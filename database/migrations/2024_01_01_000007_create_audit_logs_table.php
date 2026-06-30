@@ -18,10 +18,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('audit_logs', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
 
             // Actor (nullable: system events have no actor)
-            $table->foreignId('user_id')
+            $table->foreignUuid('user_id')
                 ->nullable()
                 ->constrained('users')
                 ->nullOnDelete();
@@ -29,7 +29,7 @@ return new class extends Migration
             // What happened
             $table->string('action');         // e.g. "login", "resource.created"
             $table->string('entity_type');    // e.g. "Resource", "User"
-            $table->unsignedBigInteger('entity_id')->nullable(); // ID of affected entity
+            $table->uuid('entity_id')->nullable(); // ID of affected entity
             $table->text('description');      // Human-readable description
 
             // Flexible payload

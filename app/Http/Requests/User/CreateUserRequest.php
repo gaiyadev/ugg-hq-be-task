@@ -23,7 +23,7 @@ class CreateUserRequest extends FormRequest
             'password' => ['required', 'confirmed', Password::min(8)->letters()->mixedCase()->numbers()],
             'status'   => ['sometimes', 'string', 'in:active,inactive,suspended'],
             'role_ids' => ['sometimes', 'array'],
-            'role_ids.*' => ['integer', 'exists:roles,id'],
+            'role_ids.*' => ['uuid', 'exists:roles,id'],
         ];
     }
 }

@@ -16,9 +16,9 @@ interface AuditLogRepositoryInterface
     public function log(
         AuditAction $action,
         string $entityType,
-        ?int $entityId,
+        ?string $entityId,
         string $description,
-        ?int $userId = null,
+        ?string $userId = null,
         ?array $metadata = null,
         ?string $ipAddress = null,
         ?string $userAgent = null
@@ -29,5 +29,5 @@ interface AuditLogRepositoryInterface
      */
     public function paginate(int $perPage, array $filters = []): LengthAwarePaginator;
 
-    public function findById(int $id): ?AuditLog;
+    public function findById(string $id): ?AuditLog;
 }

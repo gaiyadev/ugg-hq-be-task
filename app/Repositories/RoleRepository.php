@@ -13,7 +13,7 @@ class RoleRepository implements RoleRepositoryInterface
         private readonly Role $model
     ) {}
 
-    public function findById(int $id): ?Role
+    public function findById(string $id): ?Role
     {
         return $this->model->with(['permissions:id,name,slug,group'])->find($id);
     }
@@ -82,12 +82,12 @@ class RoleRepository implements RoleRepositoryInterface
         $role->permissions()->sync($permissionIds);
     }
 
-    public function assignPermission(Role $role, int $permissionId): void
+    public function assignPermission(Role $role, string $permissionId): void
     {
         $role->permissions()->syncWithoutDetaching([$permissionId]);
     }
 
-    public function removePermission(Role $role, int $permissionId): void
+    public function removePermission(Role $role, string $permissionId): void
     {
         $role->permissions()->detach($permissionId);
     }

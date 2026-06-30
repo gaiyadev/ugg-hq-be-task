@@ -13,13 +13,13 @@ final readonly class ResourceDTO
         public string $title,
         public ?string $description,
         public ResourceStatus $status,
-        public ?int $updatedBy = null,
+        public ?string $updatedBy = null,
     ) {}
 
     /**
      * @param  array<string, mixed>  $validated
      */
-    public static function fromRequest(array $validated, ?int $updatedBy = null): self
+    public static function fromRequest(array $validated, ?string $updatedBy = null): self
     {
         return new self(
             title:       $validated['title'],

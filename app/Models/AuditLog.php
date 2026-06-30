@@ -4,9 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
 class AuditLog extends Model
 {
+    use HasUuids;
+
     /**
      * Immutable log: no updated_at column.
      * Setting UPDATED_AT to null tells Eloquent not to manage it.
@@ -46,12 +49,12 @@ class AuditLog extends Model
         return $query->where('action', $action);
     }
 
-    public function scopeForEntity($query, string $type, int $id)
+    public function scopeForEntity($query, string $type, string $id)
     {
         return $query->where('entity_type', $type)->where('entity_id', $id);
     }
 
-    public function scopeForUser($query, int $userId)
+    public function scopeForUser($query, string $userId)
     {
         return $query->where('user_id', $userId);
     }

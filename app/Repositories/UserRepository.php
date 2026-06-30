@@ -13,7 +13,7 @@ class UserRepository implements UserRepositoryInterface
         private readonly User $model
     ) {}
 
-    public function findById(int $id): ?User
+    public function findById(string $id): ?User
     {
         return $this->model->with(['roles.permissions'])->find($id);
     }
@@ -81,12 +81,12 @@ class UserRepository implements UserRepositoryInterface
         return (bool) $user->delete();
     }
 
-    public function assignRole(User $user, int $roleId): void
+    public function assignRole(User $user, string $roleId): void
     {
         $user->roles()->syncWithoutDetaching([$roleId]);
     }
 
-    public function removeRole(User $user, int $roleId): void
+    public function removeRole(User $user, string $roleId): void
     {
         $user->roles()->detach($roleId);
     }

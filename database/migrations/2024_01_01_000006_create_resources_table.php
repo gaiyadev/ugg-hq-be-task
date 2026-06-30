@@ -24,7 +24,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('resources', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->string('title');
             $table->text('description')->nullable();
             $table->string('status')->default('draft'); // draft|pending|approved|rejected
@@ -33,15 +33,15 @@ return new class extends Migration
             $table->string('signature', 64)->nullable(); // SHA256 = 64 hex chars
 
             // Audit trail columns
-            $table->foreignId('created_by')
+            $table->foreignUuid('created_by')
                 ->nullable()
                 ->constrained('users')
                 ->nullOnDelete();
-            $table->foreignId('updated_by')
+            $table->foreignUuid('updated_by')
                 ->nullable()
                 ->constrained('users')
                 ->nullOnDelete();
-            $table->foreignId('approved_by')
+            $table->foreignUuid('approved_by')
                 ->nullable()
                 ->constrained('users')
                 ->nullOnDelete();

@@ -27,7 +27,7 @@ class UserService
         return $this->userRepository->paginate($perPage, $filters);
     }
 
-    public function findOrFail(int $id): User
+    public function findOrFail(string $id): User
     {
         $user = $this->userRepository->findById($id);
 
@@ -53,13 +53,13 @@ class UserService
      *
      * @param  array<string, mixed>  $data
      */
-    public function update(int $id, array $data): User
+    public function update(string $id, array $data): User
     {
         $user = $this->findOrFail($id);
         return $this->userRepository->update($user, $data);
     }
 
-    public function delete(int $id): bool
+    public function delete(string $id): bool
     {
         $user = $this->findOrFail($id);
         return $this->userRepository->delete($user);
@@ -70,7 +70,7 @@ class UserService
      *
      * @throws \App\Exceptions\Permission\InsufficientPermissionException
      */
-    public function assignRole(int $userId, int $roleId, User $actor): void
+    public function assignRole(string $userId, string $roleId, User $actor): void
     {
         $user = $this->findOrFail($userId);
         $role = $this->roleRepository->findById($roleId);
@@ -92,7 +92,7 @@ class UserService
     /**
      * Remove a role from a user.
      */
-    public function removeRole(int $userId, int $roleId, User $actor): void
+    public function removeRole(string $userId, string $roleId, User $actor): void
     {
         $user = $this->findOrFail($userId);
         $role = $this->roleRepository->findById($roleId);

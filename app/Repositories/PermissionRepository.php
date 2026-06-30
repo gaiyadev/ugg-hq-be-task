@@ -12,7 +12,7 @@ class PermissionRepository implements PermissionRepositoryInterface
         private readonly Permission $model
     ) {}
 
-    public function findById(int $id): ?Permission
+    public function findById(string $id): ?Permission
     {
         return $this->model->find($id);
     }

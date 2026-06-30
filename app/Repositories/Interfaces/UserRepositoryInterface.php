@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Collection;
 
 interface UserRepositoryInterface
 {
-    public function findById(int $id): ?User;
+    public function findById(string $id): ?User;
 
     public function findByEmail(string $email): ?User;
 
@@ -29,9 +29,9 @@ interface UserRepositoryInterface
 
     public function delete(User $user): bool;
 
-    public function assignRole(User $user, int $roleId): void;
+    public function assignRole(User $user, string $roleId): void;
 
-    public function removeRole(User $user, int $roleId): void;
+    public function removeRole(User $user, string $roleId): void;
 
     public function syncRoles(User $user, array $roleIds): void;
 }

@@ -37,7 +37,7 @@ class AuditLogController extends Controller
     /**
      * GET /api/audit-logs/{id}
      */
-    public function show(int $id): JsonResponse
+    public function show(string $id): JsonResponse
     {
         $log = $this->auditLogService->findById($id);
 

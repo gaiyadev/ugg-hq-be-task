@@ -13,11 +13,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('user_roles', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')
+
+            $table->foreignUuid('user_id')
                 ->constrained('users')
                 ->cascadeOnDelete();
-            $table->foreignId('role_id')
+            $table->foreignUuid('role_id')
                 ->constrained('roles')
                 ->cascadeOnDelete();
             $table->timestamp('created_at')->useCurrent();

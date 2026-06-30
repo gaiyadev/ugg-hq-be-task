@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Collection;
 
 interface RoleRepositoryInterface
 {
-    public function findById(int $id): ?Role;
+    public function findById(string $id): ?Role;
 
     public function findBySlug(string $slug): ?Role;
 
@@ -33,7 +33,7 @@ interface RoleRepositoryInterface
 
     public function syncPermissions(Role $role, array $permissionIds): void;
 
-    public function assignPermission(Role $role, int $permissionId): void;
+    public function assignPermission(Role $role, string $permissionId): void;
 
-    public function removePermission(Role $role, int $permissionId): void;
+    public function removePermission(Role $role, string $permissionId): void;
 }
